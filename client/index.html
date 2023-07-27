@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles/index.css">
+    <title>AWS Billing</title>
+</head>
+<body>
+    <header>
+         <h2 class="logo">BILLING</h2>
+        <nav class="navbar">
+          <div class="wrapper active-popup">
+            <!-- <span class="icon-close"><ion-icon name="close"></ion-icon></span> -->
+            <div class="form-box">
+                <h2>BILLING</h2> 
+                 <form action="/billing" method="post">
+                    <!-- <div class="input-box">
+                        <span class="icon"><ion-icon name="id-card"></ion-icon></span>
+                        <input type="ID" required>
+                        <label>ID</label> -->
+                    <!-- </div>
+                     -->
+                    <button type="submit" class="btn">Get Billing information</button>
+                </form> 
+            </div>
+        
+        </nav>
+    </header>
+
+    <!-- <div class="wrapper active-popup">
+       <span class="icon-close"><ion-icon name="close"></ion-icon></span> -->
+      <!-- <div class="form-box">
+          <h2>BILLING</h2> 
+           <form action="/billing" method="post"> -->
+              <!-- <div class="input-box">
+                  <span class="icon"><ion-icon name="id-card"></ion-icon></span>
+                  <input type="ID" required>
+                  <label>ID</label> -->
+              <!-- </div>
+               -->
+              <!-- <button type="submit" class="btn">Billing information</button>
+          </form> 
+      </div>  -->
+   
+
+    </div>
+    <div id="billing-data">
+        <div id="billing-info" >
+            <h3>Billing information</h3>
+            <p id="cost"></p>
+            <p id="startDate"></p>
+            <p id="endDate"></p>
+        </div>
+      
+    </div>
+
+
+ 
+<script>
+   
+
+  
+        
+  document.addEventListener('DOMContentLoaded', () => {
+    const form = document.querySelector('form');
+
+    form.addEventListener('submit', async (event) => {
+      event.preventDefault();
+
+      try {
+        // const response = await fetch('/billing', { method: 'POST' });
+          // const data = await response.json();
+          const data = {"ResultsByTime":[{"TimePeriod":{"Start":"2023-07-01","End":"2023-07-31"},"Total":{"AmortizedCost":{"Amount":"392.6864864982","Unit":"USD"}},"Groups":[],"Estimated":true}],"DimensionValueAttributes":[]};
+
+        // Update the billing information on the page
+        const costElement = document.getElementById('cost');
+        const startDateElement = document.getElementById('startDate');
+        const endDateElement = document.getElementById('endDate');
+
+        costElement.textContent = `Cost: ${data.ResultsByTime[0].Total.AmortizedCost.Amount} ${data.ResultsByTime[0].Total.AmortizedCost.Unit}`;
+        startDateElement.textContent = `Start Date: ${data.ResultsByTime[0].TimePeriod.Start}`;
+        endDateElement.textContent = `End Date: ${data.ResultsByTime[0].TimePeriod.End}`;
+
+        // Show the billing information section
+        const billingInfoSection = document.getElementById('billing-info');
+        billingInfoSection.style.display = 'block';
+      } catch (error) {
+        console.error('Error fetching billing information:', error);
+        alert('Failed to fetch billing information.');
+      }
+    });
+  });
+    </script>
+ 
+<script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+
+</body>
+</html>
